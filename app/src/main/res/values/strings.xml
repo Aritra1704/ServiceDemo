@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ServiceDemo</string>
+    <string name="Service_Demo_Tag">Service Tag</string>
+    <string name="Service_Intent_Key">Service_Intent_Key</string>
+</resources>
