@@ -24,7 +24,6 @@ public class MyService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d("ServiceDemo ", "In service Binder");
-
         return mBinder;
     }
 
@@ -32,13 +31,11 @@ public class MyService extends Service {
     public void onRebind(Intent intent) {
         super.onRebind(intent);
         Log.d("ServiceDemo ", "On ReBind");
-
     }
 
     @Override
     public void unbindService(ServiceConnection conn) {
         Log.d("ServiceDemo", "On UnBindService ");
-
         super.unbindService(conn);
     }
 

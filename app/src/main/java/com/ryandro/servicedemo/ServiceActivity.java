@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ServiceActivity extends AppCompatActivity implements MyInterface{
+public class ServiceActivity extends AppCompatActivity implements MyInterface {
     private Intent serviceIntend;
     private MyService myService;
     private boolean isServiceBound = false;
@@ -76,11 +76,10 @@ public class ServiceActivity extends AppCompatActivity implements MyInterface{
 
     @OnClick(R.id.btn_getServiceData)
     public void displaySericeData() {
-        if(isServiceBound)
-            txt_serviceData.setText(""+myService.getCountNumber());
+        if (isServiceBound)
+            txt_serviceData.setText("" + myService.getCountNumber());
         else
             txt_serviceData.setText("Service is Not Bind");
-
     }
 
     @Override
