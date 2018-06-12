@@ -23,14 +23,15 @@ public class MyService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d("ServiceDemo ", "In service Binder");
+        Log.d("ServiceDemo ", "OnBind  Method");
         return mBinder;
     }
 
     @Override
     public void onRebind(Intent intent) {
-        super.onRebind(intent);
         Log.d("ServiceDemo ", "On ReBind");
+        super.onRebind(intent);
+
     }
 
     @Override
@@ -57,7 +58,7 @@ public class MyService extends Service {
         if (intent != null && intent.getExtras() != null) {
             strIntentValue = intent.getStringExtra(getResources().getString(R.string.Service_Intent_Key));
         } else {
-            final String strIntentValue = "Value Getting Null";
+             strIntentValue = "Value Getting Null";
         }
         new Thread(new Runnable() {
             @Override
