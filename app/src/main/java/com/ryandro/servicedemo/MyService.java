@@ -23,7 +23,7 @@ public class MyService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d("ServiceDemo ", "OnBind  Method");
+        Log.d("ServiceDemo ", "OnBind Method");
         return mBinder;
     }
 
@@ -50,8 +50,24 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(getResources().getString(R.string.Service_Demo_Tag), "In OnStartCommond, Thread ID: " + Thread.currentThread().getId() + "");
-        displayNumber(intent);
+//        displayNumber(intent);
+        doSometask();
         return START_STICKY;
+    }
+
+    private void doSometask() {
+        int count = 1;
+        for (int i=0 ;1<10;i++){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Log.d(getResources().getString(R.string.Service_Demo_Tag), "Task Thread ID: " + Thread.currentThread().getId() + "");
+            Log.d("Intent Value  ", "" + strIntentValue);
+            Log.d("Number Count ", "" + count++);
+//            countNumber = count;
+        }
     }
 
     private void displayNumber(Intent intent) {

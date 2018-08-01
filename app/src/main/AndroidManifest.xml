@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".MyService"/>
+
+        <service android:name=".MyService" />
+        <service android:name=".MyServiceForUiUpdate" />
+        <activity android:name=".NextActivity"></activity>
     </application>
 
 </manifest>

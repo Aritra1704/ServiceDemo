@@ -6,5 +6,5 @@ package com.ryandro.servicedemo;
 
 public interface MyInterface {
 
-    public int onResponse();
+    public int onResponse(int data);
 }

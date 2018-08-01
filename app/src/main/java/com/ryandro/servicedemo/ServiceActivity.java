@@ -1,15 +1,13 @@
 package com.ryandro.servicedemo;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,19 +22,23 @@ public class ServiceActivity extends AppCompatActivity implements MyInterface {
     @Nullable
     @BindView(R.id.txt_ServiceData)
     public TextView txt_serviceData;
+    MyServiceForUiUpdate myServiceForUiUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        serviceIntend = new Intent(ServiceActivity.this, MyService.class);
+//        serviceIntend = new Intent(ServiceActivity.this, MyService.class);
+        serviceIntend = new Intent(ServiceActivity.this, MyServiceForUiUpdate.class);
         Log.d(getResources().getString(R.string.Service_Demo_Tag), "In Activity Thread ID: " + Thread.currentThread().getId() + "");
-
+        myServiceForUiUpdate = new MyServiceForUiUpdate(ServiceActivity.this);
     }
 
     @OnClick(R.id.btn_startService)
     public void startService() {
+        Log.d(getResources().getString(R.string.Service_Demo_Tag), "In Activity Thread ID: " + Thread.currentThread().getId() + "");
+
         serviceIntend.putExtra(getResources().getString(R.string.Service_Intent_Key), "Intent Value present");
         startService(serviceIntend);
     }
@@ -48,7 +50,11 @@ public class ServiceActivity extends AppCompatActivity implements MyInterface {
 
     @OnClick(R.id.btn_bindService)
     public void bindService() {
-        if (serviceConnection == null) {
+        Log.d("My Activity", "Button Clicked");
+
+        startActivity(new Intent(ServiceActivity.this, NextActivity.class));
+
+       /* if (serviceConnection == null) {
             serviceConnection = new ServiceConnection() {
                 @Override
                 public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -63,7 +69,7 @@ public class ServiceActivity extends AppCompatActivity implements MyInterface {
                 }
             };
         }
-        bindService(serviceIntend, serviceConnection, Context.BIND_AUTO_CREATE);
+        bindService(serviceIntend, serviceConnection, Context.BIND_AUTO_CREATE);*/
     }
 
     @OnClick(R.id.btn_unBindService)
@@ -83,7 +89,8 @@ public class ServiceActivity extends AppCompatActivity implements MyInterface {
     }
 
     @Override
-    public int onResponse() {
+    public int onResponse(int data) {
+        Toast.makeText(ServiceActivity.this,"Got Service Response: "+data,Toast.LENGTH_LONG).show();
         return 0;
     }
 }
